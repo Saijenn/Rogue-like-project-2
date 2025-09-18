@@ -19,30 +19,26 @@ public class PlayerMovement : MonoBehaviour
     {
         float InputX = Input.GetAxisRaw("Horizontal");
         float InputY = Input.GetAxisRaw("Vertical");
-       
-       
+
+
         //move x Axis
         body.linearVelocity = new Vector2(InputX * speed, body.linearVelocityY); //movement in 2D
 
-        //move y Axis
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        //Jump mechanic
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            //body.AddForce(Vector2.up * speed, ForceMode2D.Impulse); //jump in 2D
+          
             body.linearVelocityY += jumpSpeed; // Add vertical velocity for jumping effect
         }
 
-
-
-        Vector3 movement = new Vector3(InputX, 0f, InputY); //movement in 3D
+        //Flip player based on movement direction
+        if (InputX != 0)
+        {
+            float angle = InputX > 0 ? 0 : 180; // Adjust angle for 2D movement
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         
-        Vector2 direction = movement.normalized;
-
-        if (direction != Vector2.zero)
-        {
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            float angle2 = InputX > 0 ? 0 : 180; // Adjust angle for 2D movement
-            transform.rotation = Quaternion.Euler(0f, angle2, 0f);
-        }
     }
 }
