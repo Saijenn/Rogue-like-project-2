@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float InputX = Input.GetAxisRaw("Horizontal");
+        float InputX = Input.GetAxisRaw("Horizontal"); //range from 0 - 1
         float InputY = Input.GetAxisRaw("Vertical");
 
 
@@ -66,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
             groundLayer                 // which layers to detect
             );
 
-        
-        return raycastHit.collider != null; //check if we hit something with the raycast (floating in air scan nothing so it's null)
+        //check if we hit something with the raycast (floating in air scan nothing so it's null)
+        return raycastHit.collider != null; 
         
     }
 }

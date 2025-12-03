@@ -19,8 +19,12 @@ public class CameraMovement : MonoBehaviour
 
     private void LateUpdate()
     {
+       
+    }
+    private void FixedUpdate()
+    {
         //smooth camera movement
-        float smoothSpeed = 0.05f; // Adjust this value to change the smoothness of the camera movement
+        float smoothSpeed = 0.1f; // Adjust this value to change the smoothness of the camera movement
         Vector3 targetPos = new Vector3(
          player.transform.position.x + offset.x,
          player.transform.position.y + offset.y,
