@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     //reference for weapon
     [SerializeField] GameObject weaponObject;
 
+   
+
     //Weapon animator
     private Animator weaponAnimator;
 
@@ -16,11 +19,12 @@ public class PlayerAttack : MonoBehaviour
     //get = anyone can read it
     //private set = only this script can change it
 
+  
     public bool isAttacking { 
         get 
         { 
-            return weaponAnimator.GetBool(AttackAnimationStrings.IsAttacking); 
-        } 
+            return weaponAnimator.GetBool(AttackAnimationStrings.IsAttacking);
+        }
     }
 
     private void Awake()
@@ -42,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
         weaponAnimator.SetBool(AttackAnimationStrings.attackTrigger, attackTrigger);
 
         //Player Attack
-        if (Input.GetMouseButtonDown(0) && !attackTrigger)
+        if (Input.GetMouseButtonDown(0) && !attackTrigger && !isAttacking)
         {
             //in attack state
             attackTrigger = true;
@@ -51,5 +55,11 @@ public class PlayerAttack : MonoBehaviour
             weaponUpdate.Attack();
         }
         else attackTrigger = false;
+
+        //clear enemy list after stop attack
+        if (!isAttacking)
+        {
+            weaponUpdate.hitEnemies.Clear();
+        }
     }
 }

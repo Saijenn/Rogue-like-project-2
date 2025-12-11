@@ -11,7 +11,7 @@ public class SetBoolBehaviour : StateMachineBehaviour
     {
         if(updateOnState)
         {
-            animator.SetBool(AttackAnimationStrings.IsAttacking, valueOnEnter);
+            animator.SetBool(boolName, valueOnEnter);
         }
     }
 
@@ -26,7 +26,7 @@ public class SetBoolBehaviour : StateMachineBehaviour
     {
         if (updateOnState)
         {
-            animator.SetBool(AttackAnimationStrings.IsAttacking, valueOnExit);
+            animator.SetBool(boolName, valueOnExit);
         }
     }
 
