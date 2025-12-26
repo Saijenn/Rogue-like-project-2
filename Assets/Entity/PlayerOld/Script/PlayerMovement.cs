@@ -1,13 +1,15 @@
 using System.Runtime.CompilerServices;
+using UnityEditor.Rendering;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D body;
-    private BoxCollider2D boxCollider;
-    [SerializeField]  private LayerMask groundLayer;
+    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private Animator animator;
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed = 5.0f;
-
     [SerializeField] private float jumpSpeed = 10.0f;
 
     
@@ -15,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -44,7 +45,15 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-       
+        //Set parameter in animator for isWalking
+        if(body.linearVelocityX != 0)
+        {
+          animator.SetBool(AnimationStrings.isWAlking, true);
+        }
+        else
+        {
+            animator.SetBool(AnimationStrings.isWAlking, false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
